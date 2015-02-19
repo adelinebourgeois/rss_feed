@@ -1,0 +1,65 @@
+<?php
+include('../Control/session.php');
+?>
+<!DOCTYPE html>
+<html lang="fr">
+   	<head>
+    	<meta charset= "utf-8" />
+   		<meta name="description" content="Restez informé"/>
+      	<link rel="stylesheet" href="../style.css" />
+        <title>Mes Flux RSS</title>
+    </head>
+    <body>
+        <section id="top">
+            <div class="content">
+                <h1><a href="accueil.php"><img src="../img/logo.png" alt = 'logo'></a></h1>
+                <div id="membre">
+                    <p>Bonjour <a href="../Control/profil.php?pseudo=<?php echo $_SESSION['pseudo']?>"><?php echo $_SESSION['pseudo'];?></a></p>
+                    <p><a href="../Control/profil.php">Compte</a></p>
+                    <p><a href="../Control/deconnexion.php">Déconnexion</a></p>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </section>
+        <div class="clear"></div>
+        <div class="content">
+            <section id="actu">
+                <article>
+                    <div class="Flux">
+                        <h2>Flux Rss</h2>
+                    </div>
+                    <div id="post">
+                    <form method="post" action="accueil.php">
+                        <input type="text" placeholder="Ajoutez Flux" name="url"/>
+                        <button type="submit" name="send">Envoyer</button>
+                    </form>
+                </div>
+                    <?php
+                        foreach($affich as $value)
+                        {?>
+                            <form method="post" action="accueil.php" class="form">
+                            <a href="accueil.php?id=<?php echo $value['id'];?>"><?php echo ($value['link']);?></a><a href="accueil.php?suppr=<?php echo $value['id']?>;" class="croix">X</a>
+                        </form>
+                        <?php
+                        }
+                    ?>
+
+                    <?php
+                        if (isset($_GET['id']) && $lien !== "")
+                        {
+                            $test = new Flux();
+                            $test->curFlux($lien['link']);
+                        } 
+                        else if(isset($_GET['id']) && empty($lien))
+                        {
+                            echo "Pas de flux correspondant";
+                        }
+                    ?>
+
+                </article>
+            <div class="clear"></div>
+            </section>
+        </div>
+    </body>	
+</html>   

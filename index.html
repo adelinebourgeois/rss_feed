@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+   	<head>
+    	<meta charset= "utf-8" />
+   		<meta name="description" content=" "/>
+      	<link rel="stylesheet" href="style.css" />
+        <script type="text/javascript" src="Js/checkForm.js"></script>
+    </head>
+    <body>
+        <section id="top">
+            <h1><img src="img/logo.png"></h1>
+        </section>
+        <section id="login">
+            <div class="content">
+    	       <div id="connexion">
+    		      <p>Déjà membre?</p>
+    		      <form method="post" action="Control/index.php">
+            	   <input type="text" placeholder="Email" name="email"/>
+            	   <input type="password" placeholder="Mot de passe" name="pwd"/>
+            	   <button type="submit" name="connexion">Connexion</button>
+                </form>
+    	       </div>
+    	       <div id="inscription">
+    		      <p>Vous êtes nouveau? Inscrivez-vous</p>
+    		      <form method="post" action="Control/index.php">
+                    <p>
+                        <?php 
+                            isset($_GET['err']) ? echo $_GET['err'] : echo "";
+                        ?>
+                    </p>
+    			     <input type="text" placeholder="Nom" name="nom"/>
+    			     <input type="text" placeholder="Prenom" name="prenom"/>
+    			     <input type="text" placeholder="Login" name="login"/>
+    			     <input type="text" placeholder="Email" name="mail"/>
+    			     <input type="password" placeholder="Mot de passe" name="pass"/>
+    			     <input type="password" placeholder="Confirmez mot de passe" name="pass1"/>
+                    <button type="submit" name="inscription">Inscription</button>
+    		      </form>   		
+    	       </div>
+                <div class="clear"></div>
+            </div>
+        </section>
+    </body>	
+</html>      	

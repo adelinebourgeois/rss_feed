@@ -1,0 +1,163 @@
+body
+{
+	background-image: url('img/background.jpg');
+	font-family: Helvetica,sans-serif;
+}
+.content
+{
+  width: 970px;
+  margin: auto;
+}
+.clear
+{
+	clear: both;
+}
+#connexion
+{
+  min-height:184px;
+}
+#inscription
+{
+  min-height: 429px;
+}
+#inscription, #connexion
+{
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding-left: 31px;
+  margin: auto;
+  width: 400px;
+  padding-bottom: 25px;
+  margin: auto;
+  width: 370px;
+  margin-bottom: 20px;
+  margin-bottom: 11px;
+}
+#inscription p,#connexion p
+{
+  color: rgba(66, 47, 26, 0.83);
+  font-weight: bold;
+  font-size: 1.5em;
+}
+#connexion input,#inscription input
+{
+  border-radius: 5px;
+  display:block;
+  margin-bottom:20px;
+  width: 300px;
+  margin-top: 20px;
+  min-height: 35px;
+}
+input:focus
+{
+  box-shadow:  0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(237, 159, 43, 0.81);
+}
+button
+{
+  background-image: url(img/bois.jpg);
+  background-size: 100% 107%;
+  border: none;
+  min-height: 55px;
+  width: 130px;
+  font-size: 1.0em;
+  font-weight: bold;
+}
+.param li
+{
+  list-style-type: none;
+  padding:0px;
+}
+li
+{
+  padding: 40px;
+  list-style-type: none;
+}
+a
+{
+  text-decoration: none;
+  color:#69422F;
+}
+a:hover
+{
+  color: rgba(203, 64, 0, 0.95);
+  font-weight: bold;
+  font-size: 1.0em;
+}
+#membre
+{
+    border-radius: 17px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding-left: 31px;
+    margin: auto;
+    width: 170px;
+    padding-bottom: 25px;
+    margin: auto;
+    float: right;
+    box-shadow: 26px 7px 16px rgba(78, 49, 16, 0.59);
+}
+#actu
+{
+  
+  border-radius: 17px;
+  background: none repeat scroll 0% 0% rgba(255, 255, 255, 0.8);
+  box-shadow: 26px 7px 16px rgba(78, 49, 16, 0.59);;
+  margin-top: 70px;
+  min-height: 221px;
+}
+#info
+{
+  width: 745px;
+  border-radius: 17px;
+  background: none repeat scroll 0% 0% rgba(255, 255, 255, 0.8);
+  float: left;
+  box-shadow: 26px 7px 16px rgba(78, 49, 16, 0.59);
+  margin-top: 70px;
+}
+#liste
+{
+
+  border-radius: 17px;
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 170px;
+  box-shadow: 26px 7px 16px rgba(78, 49, 16, 0.59);
+  text-align: center;
+}
+ul
+{
+  padding: 30px;
+  line-height: 40px;
+}
+h1
+{
+  float: left;
+}
+h1 img
+{
+  width: 150px;
+  border-radius: 83px;
+}
+h2
+{
+  text-align: center;
+  border-bottom: 7px solid #DE8118;
+  min-height: 60px;
+  color: #6E5728;
+  font-size: 1.9em;
+}
+article
+{
+  text-align: center;
+}
+.croix
+{
+  margin-left: 20px;
+  color: red;
+}
+#post
+{
+  margin-bottom: 50px;
+}
+.form
+{
+  padding: 10px;
+}
