@@ -80,6 +80,12 @@ class Flux extends Bdd
         $donnee->bindParam(':id_link', $id_link);
         $donnee->execute();
     }
+
+    /**
+     *   Fetch list ofrss flux suppr
+     *   @param int $id_user is the id user
+     *   @return rss list
+     */
     public function affichMySupprUrl($id_user)
     {
         $sql = "SELECT * FROM flux WHERE id_user = :id AND activate = 0";
