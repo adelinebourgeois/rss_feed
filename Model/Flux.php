@@ -80,6 +80,29 @@ class Flux extends Bdd
         $donnee->bindParam(':id_link', $id_link);
         $donnee->execute();
     }
+    public function affichMySupprUrl($id_user)
+    {
+        $sql = "SELECT * FROM flux WHERE id_user = :id AND activate = 0";
+        $donnee = $this->getBdd()->prepare($sql);
+        $donnee->bindParam(':id', $id_user);
+        $donnee->execute();
+        return $donnee;
+    }
+
+    /**
+     *   Remove rss
+     *   @param int $activate is the activation of url
+     *   @param int $id_link  is the flux id
+     *   @return nothing
+     */
+    public function restFlux($activate, $id_link)
+    {
+        $sql = "UPDATE flux SET activate = :activate WHERE id = :id_link";
+        $donnee = $this->getBdd()->prepare($sql);
+        $donnee->bindParam(':activate', $activate);
+        $donnee->bindParam(':id_link', $id_link);
+        $donnee->execute();
+    }
 
     /**
      *   Verify if flux exist

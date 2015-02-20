@@ -26,6 +26,7 @@ if (isset($_POST['connexion'])) {
     if (empty($_POST['email']) || empty($_POST['pwd'])) {
         echo "Saisie incorrect";
         header('Location: ../index.html');
+        exit();
     } else {
         $membre->login($_POST['email'], $_POST['pwd']);
         header('Location: ../Control/accueil.php');

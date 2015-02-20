@@ -42,10 +42,17 @@ if (isset($_GET['suppr'])) {
 
     $suppr = $affichage->supprFlux(0, $_GET['suppr']);
 }
+if (isset($_GET['restaure'])) {
+
+    $suppr = $affichage->restFlux(1, $_GET['restaure']);
+}
+
+
 
 
     $lien = "";
     $affich = $affichage->affichMyUrl($_SESSION['id']);
+    $affichSuppr = $affichage->affichMySupprUrl($_SESSION['id']);
 
 
 

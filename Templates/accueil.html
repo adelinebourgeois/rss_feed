@@ -58,8 +58,24 @@ include('../Control/session.php');
                     ?>
 
                 </article>
-            <div class="clear"></div>
             </section>
+            <section id='actu'>
+                <article>
+                    <div class="Flux">
+                        <h2>Flux Rss Supprimés</h2>
+                    </div>
+                    <?php
+                        foreach($affichSuppr as $value)
+                        {?>
+                            <form method="post" action="accueil.php" class="form">
+                            <a href="accueil.php?id=<?php echo $value['id'];?>"><?php echo ($value['link']);?></a><a href="accueil.php?restaure=<?php echo $value['id']?>;" class="croix">R</a>
+                        </form>
+                        <?php
+                        }
+                    ?>
+                </article>
+            <div class="clear"></div>
+            <section>  
         </div>
     </body>	
 </html>   
