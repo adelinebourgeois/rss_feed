@@ -3,7 +3,7 @@
 /**
  *   Flux class file
  *
- *   Class do handle flux rss
+ *   Class flux rss
  *
  *
  * PHP Version 5.4

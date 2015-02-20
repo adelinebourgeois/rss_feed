@@ -132,7 +132,6 @@ class User extends Bdd
             header('Location ../');
             exit();
         }
-
     }
 
     /**

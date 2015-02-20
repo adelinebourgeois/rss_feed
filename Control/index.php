@@ -23,7 +23,7 @@ session_start();
 if (isset($_POST['connexion'])) {
     $membre = new user();
 
-    if (!isset($_POST['email']) || !isset($_POST['pwd'])) {
+    if (empty($_POST['email']) || empty($_POST['pwd'])) {
         echo "Saisie incorrect";
         header('Location: ../index.html');
     } else {
@@ -39,9 +39,9 @@ if (isset($_POST['connexion'])) {
 if (isset($_POST["inscription"])) { 
     $membre = new user();
     
-    if (!isset($_POST['login']) || !isset($_POST['nom']) || !isset($_POST['prenom']) || !isset($_POST['mail'])) {
+    if (empty($_POST['login']) || empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['mail'])) {
         echo "Saisie incorrect";
-    } elseif (!isset($_POST['pass']) || $_POST['pass'] !== $_POST['pass1']) {
+    } elseif (empty($_POST['pass']) || $_POST['pass'] !== $_POST['pass1']) {
         echo "Mot de passe invalide ou différent";
         header('Location: ../index.html');
         exit();

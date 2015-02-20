@@ -18,7 +18,7 @@
 /**
  *   Bdd class
  *
- *   Class do handle bdd
+ *   Class bdd
  *
  * @category Nothing
  * @package  Nothing

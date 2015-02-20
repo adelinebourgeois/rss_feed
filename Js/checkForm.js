@@ -5,7 +5,7 @@
 "use strict";
 
 function checkConnection(e) {
-    var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/,
+    var regex = /^[a-zA-Z0-9._\-]+@[a-z0-9._\-]{2,}\.[a-z]{2,4}$/,
         mail = $("input[name=email]"),
         passwd = $('input[name=pwd]');
     if (mail.val() === "" || !regex.test(mail.val())) {
@@ -19,15 +19,20 @@ function checkConnection(e) {
 }
 
 function checkRegister(e) {
-    var regex = /^[a-zA-Z0-9._\-]+@[a-z0-9._\-]{2,}\.[a-z]{2,4}$/;
-    var name = $('input[name=nom]');
-    var pseudo = $('input[name=pseudo]');
-    var email = $('input[name=mail]');
-    var passwd = $('input[name=pass]');
-    var passwd2 = $('input[name=pass2]');
+    var regex = /^[a-zA-Z0-9._\-]+@[a-z0-9._\-]{2,}\.[a-z]{2,4}$/,
+        name = $('input[name=nom]'),
+        prenom = $('input[name=prenom]'),
+        pseudo = $('input[name=login]'),
+        email = $('input[name=mail]'),
+        passwd = $('input[name=pass]'),
+        passwd2 = $('input[name=pass1]');
 
     if (name.val() === "" || name.val() < 6) {
-        name.attr('placeholder', "Entrez votre vrai nom/prénom !");
+        name.attr('placeholder', "Entrez votre nom!");
+        e.preventDefault();
+    }
+    if (prenom.val() === "" || prenom.val() < 6) {
+        prenom.attr('placeholder', "Entrez votre prénom !");
         e.preventDefault();
     }
     if (pseudo.val() < 4) {
