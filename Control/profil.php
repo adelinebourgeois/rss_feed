@@ -45,7 +45,7 @@ if (isset($_POST['modifierMdp'])) {
 }
 
 //MODIF MAIL
-
+//die(var_dump($_SESSION));
 if (isset($_POST['modemail'])) {
     $user = new User();
     $user->setMail($_POST['nouveau']);
@@ -53,12 +53,18 @@ if (isset($_POST['modemail'])) {
 }
 
 //MODIF LOGIN
-
+ /*die(var_dump($_POST['modiflog']));*/
 if (isset($_POST['modiflog'])) {
+   
     $user = new User();
     $user->setLogin($_POST['log']);
     $user->modiflog($_SESSION['id'], $_SESSION['pseudo']);
 }
+
+/*$user = new User();
+$infos = $user->getInfos($_SESSION['id']);*/
+
+
 
 
 

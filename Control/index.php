@@ -16,7 +16,7 @@
 
 require'../Model/User.php';
 session_start();
-$erreur = "";
+
 
   //CONNEXION
 
@@ -24,7 +24,7 @@ if (isset($_POST['connexion'])) {
     $membre = new user();
 
     if (!isset($_POST['email']) || !isset($_POST['pwd'])) {
-        $erreur = "Saisie incorrect";
+        echo "Saisie incorrect";
         header('Location: ../index.html');
     } else {
         $membre->login($_POST['email'], $_POST['pwd']);
@@ -38,22 +38,28 @@ if (isset($_POST['connexion'])) {
 
 if (isset($_POST["inscription"])) { 
     $membre = new user();
-
+    
     if (!isset($_POST['login']) || !isset($_POST['nom']) || !isset($_POST['prenom']) || !isset($_POST['mail'])) {
-        $erreur = "Saisie incorrect";
+        echo "Saisie incorrect";
     } elseif (!isset($_POST['pass']) || $_POST['pass'] !== $_POST['pass1']) {
-        $erreur = "Mot de passe invalide ou différent";
+        echo "Mot de passe invalide ou différent";
         header('Location: ../index.html');
         exit();
     } else {
-        $tempArr = $membre->existbdd($_POST['login'], $_POST['mail']);
+        $log = htmlspecialchars(trim($_POST['login']));
+        $nom = htmlspecialchars(trim($_POST['nom']));
+        $prenom = htmlspecialchars(trim($_POST['prenom']));
+        $mail =  htmlspecialchars(trim($_POST['mail']));
+        $pass =  htmlspecialchars(trim($_POST['pass']));
+
+        $tempArr = $membre->existbdd($log, $mail);
         if (empty($tempArr)) {
                         unset($tempArr);
-                        $membre->inscription($_POST['nom'], $_POST['prenom'], $_POST['login'], $_POST['mail'], $_POST['pass']);
+                        $membre->inscription($nom, $prenom, $log, $mail, $pass);
                         header('Location:accueil.php');
                         exit();
         } else {
-                        $erreur = "Pseudo ou mail déja utilisés";
+                       echo "Pseudo ou mail déja utilisés";
         }
     }
 }

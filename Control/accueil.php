@@ -19,23 +19,28 @@ session_start();
 require'../Model/User.php';
 require'../Model/Flux.php';
 
+$xml = 'rss';
+
 //ENVOIE URL
 
 if (isset($_POST['send'])) {
-
-    $flux = new Flux();
-    $flux->sendUrl($_SESSION['id'], $_POST['url']);
+    if (strpos(($_POST['url']), $xml)) {
+        $flux = new Flux();
+        $flux->sendUrl($_SESSION['id'], $_POST['url']);
+    } else {
+        echo "url non valide";
+    }
 }
 
 
 
 //AFFICHAGE DES FLUX
 
-    $affichage = new Flux();
+$affichage = new Flux();
 
 if (isset($_GET['suppr'])) {
 
-    $suppr = $affichage->supprFlux($_SESSION['id'], $_GET['suppr']);
+    $suppr = $affichage->supprFlux(0, $_GET['suppr']);
 }
 
 

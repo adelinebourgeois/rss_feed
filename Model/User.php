@@ -55,22 +55,20 @@ class User extends Bdd
         $sql ="INSERT INTO user (nom, prenom, login, mail, password) VALUES (:nom, :prenom, :login, :mail, :password)";
 
         $donnees = $this->getBdd()->prepare($sql);
-        $donnee->bindParam(':nom', $nom);
-        $donnee->bindParam(':prenom', $prenom);
-        $donnee->bindParam(':login', $login);
-        $donnee->bindParam(':mail', $mail);
-        $donnee->bindParam(':password', sha1($password));
-
+        $donnees->bindParam(':nom', $nom);
+        $donnees->bindParam(':prenom', $prenom);
+        $donnees->bindParam(':login', $login);
+        $donnees->bindParam(':mail', $mail);
+        $donnees->bindParam(':password', sha1($password));
         $donnees->execute();
 
-        $req = "SELECT id_user FROM user WHERE login = :login and nom = :nom";
+        $req = "SELECT * FROM user WHERE login = :login and nom = :nom";
         $exec = $this->getBdd()->prepare($req);
-        $donnee->bindParam(":login", $login);
-        $donnee->bindParam(":nom", $nom);
+        $exec->bindParam(":login", $login);
+        $exec->bindParam(":nom", $nom);
         $exec->execute();
 
-        $res = $exec->fetch();
-
+        $result = $exec->fetch();
         $_SESSION['connected']      = true;
         $_SESSION['id']             = $result['id_user'];
         $_SESSION['nom']            = $result['nom'];
@@ -93,8 +91,8 @@ class User extends Bdd
     {
         $sql = "SELECT * FROM user WHERE login = :login OR mail = :mail";
         $donnees = $this->getBdd()->prepare($sql);
-        $donnee->bindParam(':login', $login);
-        $donnee->bindParam(':mail', $mail);
+        $donnees->bindParam(':login', $login);
+        $donnees->bindParam(':mail', $mail);
         $donnees->execute();
     
         $resultat = $donnees->fetch();
@@ -112,10 +110,11 @@ class User extends Bdd
      */
     public function login($mail, $pass)
     {
+        $passwd = sha1($pass);
         $req = "SELECT * FROM user WHERE mail=:mail AND password = :pass";
         $exec = $this->getBdd()->prepare($req);
         $exec->bindParam(':mail', $mail);
-        $exec->bindParam(':pass', sha1($pass));
+        $exec->bindParam(':pass', $passwd);
         $exec->execute();
            
         $result = $exec->fetch();
@@ -147,8 +146,8 @@ class User extends Bdd
 
         $sql = 'UPDATE user SET mail = :mail WHERE id_user = :id';
         $donnees = $this->getBdd()->prepare($sql);
-        $donnee->bindParam(':id', $id);
-        $donnee->bindParam(':mail', $mail);
+        $donnees->bindParam(':id', $id);
+        $donnees->bindParam(':mail', $this->_mail);
         $donnees->execute(); 
     }
 
@@ -161,14 +160,14 @@ class User extends Bdd
      */
     public function modifpwd($login, $old, $new)
     {
-        $pass= "SELECT * from user WHERE login = :login AND password = :old";
+        $sql = "SELECT * from user WHERE login = :login AND password = :old";
         
-        $pass_requete = $this->getDb()->prepare($pass);
+        $donnee = $this->getBdd()->prepare($sql);
         $donnee->bindParam(':login', $login);
         $donnee->bindParam(':old', $old);
-        $pass_requete->execute();
+        $donnee->execute();
         
-        $pass_sql=$pass_requete->fetch();
+        $pass_sql=$donnee->fetch();
 
         if ($pass_sql == false) {
             echo "Ancien mot de passe incorrecte";
@@ -176,11 +175,19 @@ class User extends Bdd
 
         $update= "UPDATE user SET password = :new WHERE login = :login";
         $update_requete = $this->getDb()->prepare($update);
-        $donnee->bindParam(':login', $login);
-        $donnee->bindParam(':new', $new);
-        $update_requete->execute();
-                                        
+        $update_requete->bindParam(':login', $login);
+        $update_requete->bindParam(':new', $new);
+        $update_requete->execute();                                   
     }
+    /*public function getInfos($id)
+    {
+        $sql= "SELECT * from user WHERE login = :id";
+        $donnee = $this->getBdd()->prepare($sql);
+        $donnee->bindParam(':id', $id);
+        $donnee->execute();
+        return $donnee->fetch(PDO::FETCH_ASSOC);
+    } */
+
 
     /**
      *   Change login user
@@ -190,12 +197,13 @@ class User extends Bdd
      */
     public function modiflog ($id, $login)
     {
-
         $sql = 'UPDATE user SET login = :login WHERE id_user = :id';
+
         $donnees = $this->getBdd()->prepare($sql);
-        $donnee->bindParam(':id', $id);
-        $donnee->bindParam(':login', $login);
-        $donnees->execute();    
+        $donnees->bindParam(':id', $id);
+        $donnees->bindParam(':login', $this->_login);
+        $donnees->execute();
+        $_SESSION['pseudo'] = $login;
     }
 
     /**

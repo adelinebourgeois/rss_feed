@@ -40,11 +40,16 @@ class Flux extends Bdd
      */
     public function sendUrl($id_user,$link)
     {
-        $sql = "INSERT INTO flux(id_user, link) VALUES (:id_user, :link)";
-        $donnee = $this->getBdd()->prepare($sql);
-        $donnee->bindParam(':id_user', $id_user);
-        $donnee->bindParam(':link', $link);
-        $donnee->execute();
+        /*$valid = $this->validateFeed($link);
+        if ($valid) {*/
+            $sql = "INSERT INTO flux(id_user, link, activate) VALUES (:id_user, :link, 1)";
+            $donnee = $this->getBdd()->prepare($sql);
+            $donnee->bindParam(':id_user', $id_user);
+            $donnee->bindParam(':link', $link);
+            $donnee->execute();
+        /*} else {
+            return false;
+        }*/
     }
 
     /**
@@ -54,7 +59,7 @@ class Flux extends Bdd
      */
     public function affichMyUrl($id_user)
     {
-        $sql = "SELECT * FROM flux WHERE id_user = :id";
+        $sql = "SELECT * FROM flux WHERE id_user = :id AND activate = 1";
         $donnee = $this->getBdd()->prepare($sql);
         $donnee->bindParam(':id', $id_user);
         $donnee->execute();
@@ -63,15 +68,15 @@ class Flux extends Bdd
 
     /**
      *   Remove rss
-     *   @param int $id      is the id user
-     *   @param int $id_link is the flux id
+     *   @param int $activate is the activation of url
+     *   @param int $id_link  is the flux id
      *   @return nothing
      */
-    public function supprFlux($id, $id_link)
+    public function supprFlux($activate, $id_link)
     {
-        $sql = "DELETE FROM flux WHERE id_user = :id AND id = :id_link";
+        $sql = "UPDATE flux SET activate = :activate WHERE id = :id_link";
         $donnee = $this->getBdd()->prepare($sql);
-        $donnee->bindParam(':id', $id);
+        $donnee->bindParam(':activate', $activate);
         $donnee->bindParam(':id_link', $id_link);
         $donnee->execute();
     }
@@ -102,15 +107,15 @@ class Flux extends Bdd
         $nombre_flux = 5;
         $fluxrss = simplexml_load_file($flux);
         $i = 0;
-        foreach ($fluxrss->channel->item as $value) {
+
+        foreach ($fluxrss->channel->item as $key => $value) {
             if ($i < $nombre_flux) {
 
                 echo '<li><a href="'.$value->link.'">'.$value->title.'</a><p>'.$value->description.'</p> <i>publié le '.date('d/m/Y à G\hi', strtotime($value->pubDate)).'</i></li>';    
             }
             $i++;   
         }
-    }
-
+    }  
 }
 
 ?>

@@ -106,10 +106,8 @@ a:hover
 }
 #info
 {
-  width: 745px;
   border-radius: 17px;
   background: none repeat scroll 0% 0% rgba(255, 255, 255, 0.8);
-  float: left;
   box-shadow: 26px 7px 16px rgba(78, 49, 16, 0.59);
   margin-top: 70px;
 }
