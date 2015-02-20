@@ -59,6 +59,9 @@ if (isset($_GET['restaure'])) {
 if (isset($_GET['id'])) {
 
     $lien = $affichage->affichContent($_SESSION['id'], $_GET['id']);
+    if (empty($lien)) {
+        header('Location:accueil.php');
+    }
 }
 
 require'../Templates/accueil.html';
