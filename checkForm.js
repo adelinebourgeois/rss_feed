@@ -27,11 +27,11 @@ function checkRegister(e) {
         passwd = $('input[name=pass]'),
         passwd2 = $('input[name=pass1]');
 
-    if (name.val() === "" || name.val() < 6) {
+    if (name.val() === "" || name.val() < 2) {
         name.attr('placeholder', "Entrez votre nom!");
         e.preventDefault();
     }
-    if (prenom.val() === "" || prenom.val() < 6) {
+    if (prenom.val() === "" || prenom.val() < 2) {
         prenom.attr('placeholder', "Entrez votre prenom !");
         e.preventDefault();
     }
