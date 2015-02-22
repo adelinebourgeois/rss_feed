@@ -49,6 +49,7 @@ if (isset($_POST['modifierMdp'])) {
 if (isset($_POST['modemail'])) {
     $user = new User();
     $user->setMail($_POST['nouveau']);
+    $_SESSION['mail'] = $_POST['nouveau'];
     $user->modifinfos($_SESSION['id'], $_SESSION['mail']);
 }
 
@@ -58,6 +59,7 @@ if (isset($_POST['modiflog'])) {
    
     $user = new User();
     $user->setLogin($_POST['log']);
+    $_SESSION['pseudo'] = $_POST['log'];
     $user->modiflog($_SESSION['id'], $_SESSION['pseudo']);
 }
 
